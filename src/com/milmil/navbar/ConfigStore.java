@@ -24,8 +24,8 @@ public class ConfigStore {
     public static void setBarHeightDp(Context c, int v) { p(c).edit().putInt("bar_h", v).apply(); }
 
     public static boolean btn(Context c, String key) {
-        // 밝기·스크린샷 버튼만 기본 OFF
-        boolean def = !("brightness".equals(key) || "screenshot".equals(key));
+        // 접근성 필요(뒤로·스크린샷)와 밝기는 기본 OFF
+        boolean def = !("brightness".equals(key) || "screenshot".equals(key) || "back".equals(key));
         return p(c).getBoolean("btn_" + key, def);
     }
     public static void setBtn(Context c, String key, boolean v) { p(c).edit().putBoolean("btn_" + key, v).apply(); }

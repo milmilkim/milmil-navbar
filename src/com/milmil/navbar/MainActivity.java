@@ -15,12 +15,15 @@ import android.widget.ScrollView;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Consumer;
 
 /** 밀밀네비바 설정 화면. */
 public class MainActivity extends Activity {
 
     private TextView statusView;
+    private final List<Switch> a11ySwitches = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle b) {
@@ -48,6 +51,7 @@ public class MainActivity extends Activity {
         }));
 
         root.addView(section("버튼"));
+        root.addView(hint("‘뒤로’와 ‘스크린샷’은 접근성 서비스가 필요합니다. 접근성을 켠 뒤에 선택할 수 있어요."));
         String[][] btns = {
                 {"back", "뒤로"}, {"home", "홈"}, {"recents", "최근앱(메모리)"},
                 {"refresh", "새로고침(잔상 제거)"}, {"screenshot", "스크린샷"}, {"brightness", "밝기"},
@@ -55,9 +59,13 @@ public class MainActivity extends Activity {
         };
         for (String[] bt : btns) {
             final String key = bt[0];
-            root.addView(sw(bt[1], ConfigStore.btn(this, key), new Consumer<Boolean>() {
+            boolean needsA11y = "back".equals(key) || "screenshot".equals(key);
+            Switch s = sw(bt[1] + (needsA11y ? " (접근성 필요)" : ""),
+                    ConfigStore.btn(this, key), new Consumer<Boolean>() {
                 @Override public void accept(Boolean v) { ConfigStore.setBtn(MainActivity.this, key, v); reloadIfOn(); }
-            }));
+            });
+            if (needsA11y) { s.setEnabled(a11yOn()); a11ySwitches.add(s); }
+            root.addView(s);
         }
 
         root.addView(section("권한"));
@@ -87,6 +95,11 @@ public class MainActivity extends Activity {
     protected void onResume() {
         super.onResume();
         if (statusView != null) statusView.setText(status());
+        // 접근성 상태에 따라 뒤로/스크린샷 토글 활성화 여부 갱신
+        boolean a11y = a11yOn();
+        for (Switch s : a11ySwitches) s.setEnabled(a11y);
+        // 권한(오버레이 등)을 설정에서 부여하고 돌아왔을 때 서비스가 오버레이를 다시 붙이도록 리로드
+        reloadIfOn();
     }
 
     // ---------- helpers ----------
