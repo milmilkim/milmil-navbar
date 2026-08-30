@@ -215,10 +215,10 @@ public class NavBarService extends Service {
                             downY = e.getRawY();
                             return true;
                         case MotionEvent.ACTION_MOVE:
-                            if (downY - e.getRawY() > dp(8)) { showBar("swipeup"); }
+                            if (downY - e.getRawY() > dp(12)) { showBar("swipeup"); }
                             return true;
                         case MotionEvent.ACTION_UP:
-                            showBar("edgetap");
+                            // 탭만으로는 열지 않는다(스와이프업 제스처 전용)
                             return true;
                     }
                     return false;
