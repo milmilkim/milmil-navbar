@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">밀밀 네비바</string>
+    <string name="a11y_desc">뒤로·최근앱 버튼 동작과 네비바 오버레이 표시에 사용합니다. 화면 내용은 읽지 않습니다.</string>
+</resources>

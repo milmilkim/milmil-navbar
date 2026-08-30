@@ -1,0 +1,8 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp" android:height="24dp"
+    android:viewportWidth="24" android:viewportHeight="24">
+    <!-- 왼쪽 삼각형: 흰 채움 + 검정 테두리 (홈 원형과 통일감) -->
+    <path android:fillColor="#FFFFFF" android:strokeColor="#000000" android:strokeWidth="1.8"
+        android:strokeLineJoin="round"
+        android:pathData="M15,4.5 L5.5,12 L15,19.5 Z" />
+</vector>
