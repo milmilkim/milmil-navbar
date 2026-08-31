@@ -69,7 +69,7 @@ public class MainActivity extends Activity {
         }
 
         root.addView(section("권한"));
-        root.addView(btn("접근성 서비스 켜기 (뒤로·최근앱 필수)", new Runnable() {
+        root.addView(btn("접근성 서비스 켜기 (뒤로·스크린샷 필수)", new Runnable() {
             @Override public void run() { startActivity(new Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)); }
         }));
         root.addView(btn("다른 앱 위에 표시 허용", new Runnable() {
@@ -78,7 +78,7 @@ public class MainActivity extends Activity {
                         Uri.parse("package:" + getPackageName())));
             }
         }));
-        root.addView(btn("시스템 설정 수정 허용 (회전·밝기 필수)", new Runnable() {
+        root.addView(btn("시스템 설정 수정 허용 (밝기 필수)", new Runnable() {
             @Override public void run() {
                 startActivity(new Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS,
                         Uri.parse("package:" + getPackageName())));
